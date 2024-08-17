@@ -1,0 +1,7 @@
+.env
+node_modules
+tmp
+.idx/
+.vscode/
+.pnpm-store/
+pnpm-lock.yaml
