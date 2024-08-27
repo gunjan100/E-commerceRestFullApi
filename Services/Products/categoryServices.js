@@ -21,6 +21,33 @@ const getAllCategoryService =async()=>{
 }
 
 
+const deleteCategoryService=async(id)=>{
+    const deletedUser = await categoryModel.findByIdAndDelete(id)
+    if(!deletedUser){
+        throw new ApiError(401, "catrogry not found")
+    }
+    return deletedUser  
+
+}
+
+const upadateCategoryService =async(id, updateData)=>{
+    const updatedCategory = await categoryModel.findByIdAndUpdate(id, {$set:updateData})
+
+    if (!updatedCategory) {
+        throw new ApiError(404, "Category not found");
+    }
+
+    return updatedCategory;
+
+}
+
+
+
+
 module.exports = {
-    addCategoryService,  getAllCategoryService
+    addCategoryService, 
+    getAllCategoryService,
+    deleteCategoryService,
+    upadateCategoryService
+    
 }
