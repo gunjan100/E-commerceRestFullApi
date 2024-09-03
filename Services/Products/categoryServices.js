@@ -36,7 +36,6 @@ const upadateCategoryService =async(id, updateData)=>{
     if (!updatedCategory) {
         throw new ApiError(404, "Category not found");
     }
-
     return updatedCategory;
 
 }
