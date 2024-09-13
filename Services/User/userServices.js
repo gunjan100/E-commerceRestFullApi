@@ -34,8 +34,14 @@ const userLogInServices = async(data)=>{
 
 }
 
+const logoutServices=async()=>{
+    return { message: 'Logout successful' };    
+
+}
+
 
 module.exports ={
     userRegistrationService,
-    userLogInServices 
+    userLogInServices ,
+    logoutServices
 }

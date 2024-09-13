@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const { registerProductService, getAllProductService, deleteProductServics } = require('../../Services/Products/productServices');
+const { registerProductService, getAllProductService, deleteProductServics, updateProductService, searchProductByPriceandCompService } = require('../../Services/Products/productServices');
 const { productValidator } = require('../../Validators/productValidator');
 const { idValidator } = require('../../Validators/commonValidator');
 
@@ -38,9 +38,31 @@ const deleteProductById = asyncHandler(async(req, res)=>{
 
 })
 
+const updateProduct = asyncHandler(async(req, res)=>{
+    const data = req.body
+    const id = req.params.id
+    const {error} = idValidator(id)
+    if(error){
+        return  res.status(401).json({success:false, message:error.details[0].message})
+    }
+    await updateProductService(id, data)
+    res.status(201).json({success:true, massage:"Product Updated Succesfully..."})
+
+})
+
+const searchProductByPriceandComp= asyncHandler(async(req, res)=>{
+    const data  = req.body
+
+   const {filterProduct} =  await searchProductByPriceandCompService(data)
+    res.status(200).json({success:true, filterProduct})
+
+})
+
 
 module.exports = {
     registerProduct, 
     getAllProduct,
-    deleteProductById
+    deleteProductById,
+    updateProduct,
+    searchProductByPriceandComp
 }

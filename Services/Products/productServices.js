@@ -3,7 +3,7 @@ const { ApiError } = require('../../Utils/apiErrors')
 const categoryModel = require('../../Models/categoryModel')
 
 const registerProductService =async(data)=>{
-    const { name, image, description, price, category} =data
+    const { name, image, description, price, category, brand} =data
     const product = await productModel.findOne({name})   
     if(product){
         throw new ApiError('401', "Product Already Esxit")
@@ -16,7 +16,7 @@ const registerProductService =async(data)=>{
        }
 
     await productModel.create({
-        name, image, description, price,
+        name, image, description, price,brand,
          category:categoryDoc._id
     })
 
@@ -40,11 +40,32 @@ const deleteProductServics = async(id)=>{
 
 }
 
+const  updateProductService =async(id, updateData)=>{
+   
+    const updateProduct = await productModel.findByIdAndUpdate(id, {$set:updateData})
+    if(!updateProduct){
+        throw new ApiError('401', "Product not Esxit")
+    }
+    return true
+
+}
+
+const  searchProductByPriceandCompService =async(data)=>{
+      const {price, brand} = data
+      const filterProduct = await productModel.find({price, brand})
+      if (!filterProduct || filterProduct.length === 0) {
+        throw new ApiError(401, "Product is not available");
+    }
+      return {filterProduct}
+}
+
 
 module.exports = {
     registerProductService, 
     getAllProductService,
-    deleteProductServics
+    deleteProductServics,
+    updateProductService,
+    searchProductByPriceandCompService
 }
 
 

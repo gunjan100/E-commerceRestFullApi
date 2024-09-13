@@ -1,5 +1,5 @@
 const express = require('express')
-const { addCategory, getAllCategory, deleteCtaegory, updateCategory } = require("../../Controllers/Product/categoryController")
+const { addCategory, getAllCategory, deleteCtaegory, updateCategory, searchProductByCategory } = require("../../Controllers/Product/categoryController")
 const {isUser, isAdmin} = require('../../Middlewares/authMiddleware')
 const { createOrder, verifyPayment  } = require('../../Controllers/razorpay')
 
@@ -11,5 +11,6 @@ router.delete('/deleteAllCategory/:id', isUser, isAdmin, deleteCtaegory )
 router.patch('/updateCategory/:id', isUser, isAdmin, updateCategory )
 router.post('/createorder', createOrder )
 router.post('/createwebHooks', verifyPayment  )
+router.post('/searchProByCate', searchProductByCategory   )
 
 module.exports = router

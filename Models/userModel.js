@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    isBlocked:{
+        type: Boolean,
+        default:false       
+    },
+  
     address: {
         street: {
             type: String,
@@ -44,7 +49,22 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ["user", "admin", "Super Admin"],
         default: "user"
+    },
+wishList:[{
+    type:mongoose.Schema.ObjectId,
+    ref:'product'
+}],
+cart :[{
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product' // Assuming you have a Product model
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        min: 1
     }
+}]
 });
 
 userSchema.pre("save", async function(next) {

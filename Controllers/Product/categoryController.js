@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const { addCategoryService, getAllCategoryService, deleteCategoryService, upadateCategoryService } = require('../../Services/Products/categoryServices');
+const { addCategoryService, getAllCategoryService, deleteCategoryService, upadateCategoryService, searchProductByCategoryService } = require('../../Services/Products/categoryServices');
 const { categoryValidator } = require('../../Validators/productValidator');
 
 const addCategory = asyncHandler(async (req, res) => {
@@ -30,9 +30,18 @@ const updateCategory = asyncHandler(async(req, res)=>{
     res.status(200).json({succsess:true, massage:"Category Updated Successfully..."})
 })
 
+
+const searchProductByCategory = asyncHandler(async(req, res)=>{
+    const data = req.body
+    const {filterProduct } = await searchProductByCategoryService(data)
+    res.status(200).json({success:true, filterProduct})
+
+})
+
 module.exports = {
     addCategory,
     getAllCategory,
     deleteCtaegory,
-    updateCategory
+    updateCategory,
+    searchProductByCategory 
 };

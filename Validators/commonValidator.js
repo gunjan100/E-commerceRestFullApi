@@ -9,5 +9,4 @@ const idValidator =(id)=>{
 }
 
 module.exports= {
-    idValidator
-}
+    idValidator}

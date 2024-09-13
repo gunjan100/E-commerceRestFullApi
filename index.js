@@ -6,6 +6,7 @@ const errorHandler = require('./Middlewares/errorHandler');
 const cookieParser = require("cookie-parser");
 const categoryRoute = require('./Routers/Product/categoryRoutes')
 const productRoute = require('./Routers/Product/productRoute')
+const  orderRoute = require('./Routers/Order/orderRoutes')
 
 const app = express();
 app.use(express.json());
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 app.use('/api/user', userRouter);
 app.use('/api/product', categoryRoute);
 app.use('/api/product' , productRoute)
+app.use('/api/order' , orderRoute)
 // Error handling middleware (should be the last middleware)
 app.use(errorHandler);
 

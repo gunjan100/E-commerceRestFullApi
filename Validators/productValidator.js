@@ -26,7 +26,9 @@ const productValidator = (data)=>{
     image: Joi.string()           // Allow the image field as a string (we are not validating it rigorously)
         .optional(),                // Field is required
     category: Joi.string()
-        .required()     
+        .required(),     
+    brand: Joi.string()
+        .required()   
     })
 
     return productSchema.validate(data)

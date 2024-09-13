@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const { userRegistrationService, userLogInServices } = require("../../Services/User/userServices")
+const { userRegistrationService, userLogInServices, logoutServices } = require("../../Services/User/userServices")
 const COOKIE_OPTIONS = require('../../Constant/apiConstant');
 const { userRegistrationValidator, userLogInValidator } = require('../../Validators/userValidation');
 
@@ -29,9 +29,18 @@ const registerUser =asyncHandler(async(req, res)=>{
 
 
 
+  const logOutUser =asyncHandler(async(req, res)=>{
+    res.clearCookie("token")
+    await logoutServices()
+    res.status(201).json({success:true, message:"User Logout SuccesFully.."})
+
+  })
+
+
 
 
 module.exports ={
     registerUser,
-    userLogin
+    userLogin,
+    logOutUser
 }
