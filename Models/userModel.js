@@ -54,6 +54,10 @@ wishList:[{
     type:mongoose.Schema.ObjectId,
     ref:'product'
 }],
+order:[{
+    type:mongoose.Schema.ObjectId,
+    ref:'Order'
+}],
 cart :[{
     product: {
         type: mongoose.Schema.Types.ObjectId,
