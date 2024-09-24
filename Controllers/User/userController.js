@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const { userRegistrationService, userLogInServices, logoutServices } = require("../../Services/User/userServices")
+const { userRegistrationService, userLogInServices, logoutServices, deleteUserAccountServices } = require("../../Services/User/userServices")
 const COOKIE_OPTIONS = require('../../Constant/apiConstant');
 const { userRegistrationValidator, userLogInValidator } = require('../../Validators/userValidation');
 
@@ -36,11 +36,18 @@ const registerUser =asyncHandler(async(req, res)=>{
 
   })
 
+  const  deleteUserAccount = asyncHandler(async(req, res)=>{
+    const id = req.params.id
+    await deleteUserAccountServices(id)
+    res.status(201).json({success:true, message:"Account Deleted Successfuly.."})
+  })
+
 
 
 
 module.exports ={
     registerUser,
     userLogin,
-    logOutUser
+    logOutUser,
+    deleteUserAccount 
 }

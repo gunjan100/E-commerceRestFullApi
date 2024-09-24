@@ -39,9 +39,20 @@ const logoutServices=async()=>{
 
 }
 
+const deleteUserAccountServices = async(id)=>{
+    const user = await userModel.findByIdAndDelete(id)
+    if(!user){
+      throw new ApiError(401, "User id not found");
+    }
+  
+
+
+}
+
 
 module.exports ={
     userRegistrationService,
     userLogInServices ,
-    logoutServices
+    logoutServices,
+    deleteUserAccountServices
 }
